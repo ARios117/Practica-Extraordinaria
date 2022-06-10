@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['psi-p3-mario-alex.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['desolate-tundra-77433.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
