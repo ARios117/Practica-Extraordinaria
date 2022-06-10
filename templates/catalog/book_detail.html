@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if book %}
+    <h1>Title: {{ book.title }}</h1>
+
+    <p><strong>Authores:</strong></p> <!-- author detail link not yet defined -->
+    {% for a in book.author.all %}
+    <p>- {{ a }}</p>
+    {% endfor %}
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Precio:</strong> {{ book.price }} €</p>
+    <p><strong>Popularidad:</strong> {{ book.score }}/10</p>
+    {% if user.is_authenticated %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+      {{ form }}
+      </table>
+      <input type="submit" value="Añadir al carro" />
+    </form>
+
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+      {{ vote_form }}
+      </table>
+      <input type="submit" value="Votar libro" />
+    </form>
+    {% endif %}
+    {% load static %}
+    <img src="{% static book.path_to_cover_image %}" alt="Portada"/>
+    <br>
+    {% for c in book.comment_set.all %}
+    <br>
+    <p><strong>{{c.user}} dice:</strong></p>
+    <p>{{ c.msg }}</p>
+    {% endfor %}
+  {% else %}
+    <h2>ERROR 404 NOT FOUND</h2>
+    El libro especificado no existe. Compruebe que la URL sea correcta.
+  {% endif %}
+  
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Catalog Home</title>
+{% endblock %}
+
+{% block content %}
+<h1>BookShop Homepage</h1>
+
+  <p>Bienvenido a <em>BookShop</em></p>
+
+<h2>Libros mas populares</h2> 
+{% for b1 in libros_mas_populares %}
+      <li>
+      <strong>
+          <a href="{{ b1.get_absolute_url }}">{{ b1 }}</a>
+      </strong>
+      </li>
+{% endfor %}
+
+<h2>Libros mas recientes</h2> 
+{% for b1 in libros_mas_recientes %}
+      <li>
+      <strong>
+          <a href="{{ b1.get_absolute_url }}">{{ b1 }}</a>
+      </strong>
+      </li>
+{% endfor %}
+
+<h2>Libros con mas votos</h2> 
+{% for b1 in libros_mas_votados %}
+      <li>
+      <strong>
+          <a href="{{ b1.get_absolute_url }}">{{ b1 }}</a>
+      </strong>
+      </li>
+{% endfor %}
+
+<br> 
+<br> 
+
+{% endblock %}

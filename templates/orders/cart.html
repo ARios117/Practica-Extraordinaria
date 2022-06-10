@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Carro</title>
+{% endblock %}
+
+{% block content %}
+
+<h2>Carro de la Compra</h2>
+<br>
+
+{% if items %}
+
+<p >Total: {{ total_price }} &euro;</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio Total (&euro;)</th>
+        <th scope="col"> </th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for i in items %}
+      <tr>
+          <td> {{ i.book.title }}</td>
+          <td> {{ i.price }}</td>
+          <td> {{ i.quantity }}</td>
+          <td> {{ i.total_price }}</td>
+          <td><a class="" href="{{ i.book.get_remove_url }}">Eliminar</a></td>
+      </tr>
+    {% endfor %}
+
+    <a href="{% url 'order_create' %}">Comprar</a>
+  
+{% else %}
+      <p>No hay items en el carro.</p>
+{% endif %}
+
+
+
+{% endblock %}

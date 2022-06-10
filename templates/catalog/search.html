@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Catalog Search</title>
+{% endblock %}
+
+{% block content %}
+
+<h2>Mostrando resultados con: {{ busqueda }}</h2>
+
+{% for b in resultados %}
+      <li>
+      <strong>
+          <a href="{{ b.get_absolute_url }}">{{ b }}</a>
+      </strong>
+      </li>
+{% endfor %}
+
+{% endblock %}

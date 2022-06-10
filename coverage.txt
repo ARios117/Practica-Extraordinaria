@@ -1,0 +1,36 @@
+Name                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------
+catalog/__init__.py                                0      0   100%
+catalog/admin.py                                   7      0   100%
+catalog/apps.py                                    4      0   100%
+catalog/forms.py                                   3      0   100%
+catalog/management/commands/populate.py           92      1    99%   48
+catalog/migrations/0001_initial.py                10      0   100%
+catalog/migrations/0002_alter_book_date.py         6      0   100%
+catalog/migrations/0003_alter_book_date.py         6      0   100%
+catalog/migrations/0004_alter_book_date.py         6      0   100%
+catalog/migrations/0005_alter_book_date.py         6      0   100%
+catalog/migrations/0006_alter_book_date.py         6      0   100%
+catalog/migrations/__init__.py                     0      0   100%
+catalog/models.py                                 43      0   100%
+catalog/urls.py                                    6      0   100%
+catalog/validators.py                              7      4    43%   5-6, 12-13
+catalog/views.py                                  45     12    73%   44-52, 57-61, 68-69, 73, 76, 81, 86
+orders/__init__.py                                 0      0   100%
+orders/admin.py                                    6      0   100%
+orders/apps.py                                     4      0   100%
+orders/cart.py                                    45      0   100%
+orders/context.py                                 10      0   100%
+orders/forms.py                                   17      0   100%
+orders/migrations/0001_initial.py                  9      0   100%
+orders/migrations/0002_auto_20211129_1737.py       6      0   100%
+orders/migrations/0003_auto_20211220_1350.py       7      0   100%
+orders/migrations/0004_auto_20211220_1427.py       6      0   100%
+orders/migrations/0005_auto_20211220_1427.py       6      0   100%
+orders/migrations/0006_auto_20211220_1601.py       6      0   100%
+orders/migrations/__init__.py                      0      0   100%
+orders/models.py                                  34      0   100%
+orders/urls.py                                     6      0   100%
+orders/views.py                                   42      3    93%   105-109
+----------------------------------------------------------------------------
+TOTAL                                            451     20    96%
