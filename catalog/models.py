@@ -174,12 +174,6 @@ class Vote(models.Model):
         super(Vote, self).save(*args, **kwargs)
         self.book.save()
 
-    # def get_absolute_url(self):
-    #     """
-    #     Retorna la url para acceder a una instancia particular de un autor.
-    #     """
-    #     return reverse('author-detail', args=[str(self.id)])
-
     def __str__(self):
         """
         String para representar el Objeto Modelo

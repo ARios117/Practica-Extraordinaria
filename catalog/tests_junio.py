@@ -120,8 +120,43 @@ class VoteTests(TestCase):
 
         self.assertEqual(book.score, (v1.score+v2.score)/2)
 
+        userDict3 = {
+            "username": 'Pepe',
+            "password": 'troncomovil',
+            "first_name": 'Pablo',
+            "last_name": 'Marmol',
+            "email": 'p.marmol@cantera.com',
+        }
+        user3 = self.create_check(userDict3, User)
+
+        voteDict3 = {    "book": book,
+                        "user": user3,
+                        "score": randrange(11)
+                        }
+        v3 = self.create_check(voteDict3, Vote)
+
+        self.assertEqual(book.score, (v1.score+v2.score+v3.score)/3)
+
     def test06_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
         
         self.assertEqual(book.score, None)
+
+    def test07_vote(self):
+        user = self.create_check(self.userDict, User)
+        book = self.create_check(self.bookDict, Book)
+        voteDict = {    "book": book,
+                        "user": user,
+                        "score": randrange(11)
+                        }
+        v1 = self.create_check(voteDict, Vote)
+
+
+        voteDict2 = {    "book": book,
+                        "user": user,
+                        "score": randrange(11)
+                        }
+        v2 = self.create_check(voteDict2, Vote)
+
+        self.assertEqual(book.score, v2.score)
