@@ -1,13 +1,13 @@
-from .models import Vote, Book, User, Author
-from .management.commands.populate import Command
+from .models import Vote, Book, User
 from django.test import TestCase
 from decimal import Decimal
 
 from random import randrange
 
+
 class VoteTests(TestCase):
     """Test that populate  has been saved data properly
-       require files XXXX.pkl stored in the same directory that manage.py"""
+    require files XXXX.pkl stored in the same directory that manage.py"""
 
     def setUp(self):
         self.authorDict = {
@@ -28,7 +28,7 @@ class VoteTests(TestCase):
             "last_name": 'Marmol',
             "email": 'p.marmol@cantera.com',
         }
-    
+
     def create_check(self, dictionary, ObjectClass):
         """ create an object of the class 'ObjectClass'
         using the dictionary. Then,
@@ -49,10 +49,11 @@ class VoteTests(TestCase):
     def test01_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": randrange(11)
-                        }
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": randrange(11)
+        }
         v1 = self.create_check(voteDict, Vote)
         self.assertEqual(user.pk, v1.user.pk)
         self.assertEqual(book.pk, v1.book.pk)
@@ -60,36 +61,43 @@ class VoteTests(TestCase):
     def test02_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": 11
-                        }
-        v1=None
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": 11
+        }
+
+        v1 = None
+
         try:
             v1 = self.create_check(voteDict, Vote)
-        except:
+        except BaseException:
             self.assertEqual(v1, None)
-    
+
     def test03_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": -1
-                        }
-        v1=None
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": -1
+        }
+
+        v1 = None
+
         try:
             v1 = self.create_check(voteDict, Vote)
-        except:
+        except BaseException:
             self.assertEqual(v1, None)
 
     def test04_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": randrange(11)
-                        }
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": randrange(11)
+        }
         v1 = self.create_check(voteDict, Vote)
         self.assertLessEqual(v1.score, 10)
         self.assertGreaterEqual(v1.score, 0)
@@ -97,10 +105,11 @@ class VoteTests(TestCase):
     def test05_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": randrange(11)
-                        }
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": randrange(11)
+        }
         v1 = self.create_check(voteDict, Vote)
 
         userDict2 = {
@@ -112,10 +121,11 @@ class VoteTests(TestCase):
         }
         user2 = self.create_check(userDict2, User)
 
-        voteDict2 = {    "book": book,
-                        "user": user2,
-                        "score": randrange(11)
-                        }
+        voteDict2 = {
+            "book": book,
+            "user": user2,
+            "score": randrange(11)
+        }
         v2 = self.create_check(voteDict2, Vote)
 
         self.assertEqual(book.score, (v1.score+v2.score)/2)
@@ -129,34 +139,35 @@ class VoteTests(TestCase):
         }
         user3 = self.create_check(userDict3, User)
 
-        voteDict3 = {    "book": book,
-                        "user": user3,
-                        "score": randrange(11)
-                        }
+        voteDict3 = {
+            "book": book,
+            "user": user3,
+            "score": randrange(11)
+        }
         v3 = self.create_check(voteDict3, Vote)
 
         self.assertEqual(book.score, (v1.score+v2.score+v3.score)/3)
 
     def test06_vote(self):
-        user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        
+
         self.assertEqual(book.score, None)
 
     def test07_vote(self):
         user = self.create_check(self.userDict, User)
         book = self.create_check(self.bookDict, Book)
-        voteDict = {    "book": book,
-                        "user": user,
-                        "score": randrange(11)
-                        }
-        v1 = self.create_check(voteDict, Vote)
+        voteDict = {
+            "book": book,
+            "user": user,
+            "score": randrange(11)
+        }
+        self.create_check(voteDict, Vote)
 
-
-        voteDict2 = {    "book": book,
-                        "user": user,
-                        "score": randrange(11)
-                        }
+        voteDict2 = {
+            "book": book,
+            "user": user,
+            "score": randrange(11)
+        }
         v2 = self.create_check(voteDict2, Vote)
 
         self.assertEqual(book.score, v2.score)

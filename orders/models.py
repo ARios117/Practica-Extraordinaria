@@ -5,6 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 
+
 class Order(models.Model):
 
     first_name = models.CharField(max_length=100)
@@ -28,10 +29,10 @@ class Order(models.Model):
     def get_total_cost(self):
 
         total_price = 0
-        
+
         for i in self.items.all():
             total_price += i.book.price * i.quantity
-        
+
         return total_price
 
     def __str__(self):
@@ -40,7 +41,9 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
 
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name='items')
+    order = models.ForeignKey(
+        Order, on_delete=models.SET_NULL, null=True, related_name='items'
+    )
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
 
     price = models.DecimalField(

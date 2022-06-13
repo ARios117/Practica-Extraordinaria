@@ -4,7 +4,7 @@ catalog/__init__.py                                 0      0   100%
 catalog/admin.py                                    8      0   100%
 catalog/apps.py                                     4      0   100%
 catalog/forms.py                                    5      0   100%
-catalog/management/commands/populate.py           102     81    21%   48-68, 75-81, 85-115, 119-146, 154-164, 168-241, 245-270, 275-292
+catalog/management/commands/populate.py           102      1    99%   49
 catalog/migrations/0001_initial.py                 10      0   100%
 catalog/migrations/0002_alter_book_date.py          6      0   100%
 catalog/migrations/0003_alter_book_date.py          6      0   100%
@@ -25,9 +25,38 @@ catalog/migrations/0017_alter_book_date.py          6      0   100%
 catalog/migrations/0018_alter_book_date.py          6      0   100%
 catalog/migrations/0019_alter_book_date.py          6      0   100%
 catalog/migrations/__init__.py                      0      0   100%
-catalog/models.py                                  64      3    95%   30, 108, 148
+catalog/models.py                                  64      0   100%
 catalog/urls.py                                     6      0   100%
 catalog/validators.py                               7      4    43%   5-6, 12-13
-catalog/views.py                                   60     43    28%   18-38, 47-88, 96-101, 104-109
+catalog/views.py                                   60      5    92%   57-59, 75-84
+orders/__init__.py                                  0      0   100%
+orders/admin.py                                     6      0   100%
+orders/apps.py                                      4      0   100%
+orders/cart.py                                     45      0   100%
+orders/context.py                                  10      0   100%
+orders/forms.py                                    17      0   100%
+orders/migrations/0001_initial.py                   9      0   100%
+orders/migrations/0002_auto_20211129_1737.py        6      0   100%
+orders/migrations/0003_auto_20211220_1350.py        7      0   100%
+orders/migrations/0004_auto_20211220_1427.py        6      0   100%
+orders/migrations/0005_auto_20211220_1427.py        6      0   100%
+orders/migrations/0006_auto_20211220_1601.py        6      0   100%
+orders/migrations/0007_auto_20220608_1240.py        6      0   100%
+orders/migrations/0008_auto_20220608_1250.py        6      0   100%
+orders/migrations/0009_auto_20220608_1252.py        6      0   100%
+orders/migrations/0010_auto_20220608_1253.py        6      0   100%
+orders/migrations/0011_auto_20220608_1255.py        6      0   100%
+orders/migrations/0012_auto_20220608_1256.py        6      0   100%
+orders/migrations/0013_auto_20220608_1257.py        6      0   100%
+orders/migrations/0014_auto_20220608_1303.py        6      0   100%
+orders/migrations/0015_auto_20220608_1305.py        6      0   100%
+orders/migrations/0016_auto_20220608_1305.py        6      0   100%
+orders/migrations/0017_auto_20220608_1307.py        6      0   100%
+orders/migrations/0018_auto_20220608_1309.py        6      0   100%
+orders/migrations/0019_auto_20220609_1045.py        6      0   100%
+orders/migrations/__init__.py                       0      0   100%
+orders/models.py                                   34      0   100%
+orders/urls.py                                      4      0   100%
+orders/views.py                                    42      3    93%   119-123
 -----------------------------------------------------------------------------
-TOTAL                                             380    131    66%
+TOTAL                                             660     13    98%

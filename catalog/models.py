@@ -83,7 +83,7 @@ class Book(models.Model):
 
         if len(self.votes.all()) > 0:
             num = len(self.votes.all())
-            
+
             media = 0
 
             for vote in self.votes.all():
@@ -133,8 +133,6 @@ class Comment(models.Model):
     class Meta:
         ordering = ['date']
 
-
-
     # def get_absolute_url(self):
     #     """
     #     Retorna la url para acceder a una instancia particular de un autor.
@@ -151,25 +149,29 @@ class Comment(models.Model):
                 self.date.strftime("%d-%b-%Y (%H:%M:%S)")
             )
 
+
 class Vote(models.Model):
 
-    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True, related_name='votes')
+    book = models.ForeignKey(
+        'Book', on_delete=models.SET_NULL, null=True, related_name='votes'
+    )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    score = models.IntegerField(default=0, validators=[validar_gt_0, validar_lt_10])
-
+    score = models.IntegerField(
+        default=0, validators=[validar_gt_0, validar_lt_10]
+    )
 
     class Meta:
         ordering = ['book', 'user', 'score']
 
     def save(self, *args, **kwargs):
 
-        if self.score < 0 or self.score >10:
+        if self.score < 0 or self.score > 10:
             raise ValueError
 
         try:
             Vote.objects.get(book=self.book, user=self.user).delete()
-        except:
-            print("No existe voto")
+        except BaseException:
+            pass
 
         super(Vote, self).save(*args, **kwargs)
         self.book.save()

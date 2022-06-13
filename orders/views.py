@@ -5,9 +5,9 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from catalog.models import Book
-from .forms import OrderCreateForm, CartAddBookForm
 from .models import Order, OrderItem
 from decimal import Decimal
+from .forms import OrderCreateForm
 
 
 # @login_required
@@ -59,6 +59,7 @@ def cart_view(request):
 
     return render(request, 'orders/cart.html', context_dict)
 
+
 @login_required
 def order_remove(request, slug):
 
@@ -69,6 +70,7 @@ def order_remove(request, slug):
     cart.remove(book)
 
     return HttpResponseRedirect(reverse('cart_list'))
+
 
 @login_required
 def order_create(request):
@@ -85,12 +87,24 @@ def order_create(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
 
-            order = Order(first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'], email=form.cleaned_data['email'], address=form.cleaned_data['address'], postal_code=form.cleaned_data['postal_code'], city=form.cleaned_data['city'])
+            order = Order(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                address=form.cleaned_data['address'],
+                postal_code=form.cleaned_data['postal_code'],
+                city=form.cleaned_data['city']
+            )
             order.save()
 
             for b, v in cart.cart.items():
                 book = Book.objects.get(id=b)
-                orderItem = OrderItem(order=order, book=book, price=Decimal(v['price']), quantity=v['quantity'])
+                orderItem = OrderItem(
+                    order=order,
+                    book=book,
+                    price=Decimal(v['price']),
+                    quantity=v['quantity']
+                )
                 orderItem.save()
 
             context_dict['order_id'] = order.id

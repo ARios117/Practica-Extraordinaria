@@ -5,7 +5,7 @@ from catalog . models import Book
 
 class Cart(object):
 
-    def __init__ (self, request):
+    def __init__(self, request):
         """
         Initialize the cart .
         if request . session [ settings . CART_SESSION_ID ]
@@ -23,12 +23,11 @@ class Cart(object):
         # from the same client
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
-        if not cart :
+        if not cart:
             # If there is no cart create an empty one
             # and save it in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
-
 
     def add(self, book, quantity=1, update_quantity=False):
         """
@@ -49,18 +48,21 @@ class Cart(object):
         # your code goes here
         # end of your code goes here
 
-        if( book_id in self.cart and update_quantity is False):
+        if(book_id in self.cart and update_quantity is False):
 
-            book_dict = {'quantity': quantity + self.cart[book_id]['quantity'],
-                        'price': str(book.price)}
+            book_dict = {
+                'quantity': quantity + self.cart[book_id]['quantity'],
+                'price': str(book.price)
+            }
         else:
-            book_dict = {'quantity': quantity,
-                        'price': str(book.price)}
+            book_dict = {
+                'quantity': quantity,
+                'price': str(book.price)
+            }
 
         self.cart[book_id] = book_dict
 
         self.save()
-
 
     def save(self):
         # update the session cart
@@ -75,7 +77,6 @@ class Cart(object):
         # that it has been modified .
         self.session.modified = True
 
-
     def remove(self, book):
         """
         Remove a book from the cart .
@@ -84,7 +85,6 @@ class Cart(object):
         del self.cart[str(book.id)]
 
         self.save()
-
 
     def __iter__(self):
         """
@@ -106,17 +106,16 @@ class Cart(object):
         """
         book_ids = self.cart.keys()
         # get the book objects and add them to the cart
-        books = Book.objects.filter(id__in = book_ids)
+        books = Book.objects.filter(id__in=book_ids)
         for book in books:
             self.cart[str(book.id)]['book'] = book
         for item in self.cart.values():
             # since ' price ' is stored as string cast it to ' decimal '
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item ['quantity']
+            item['total_price'] = item['price'] * item['quantity']
             yield item
 
-
-    def __len__ ( self ) :
+    def __len__(self):
         """
         return the number of items in the cart . That is
         , the sum of
@@ -134,7 +133,6 @@ class Cart(object):
 
         return len
 
-
     def get_total_price(self):
         """
         returns total amount to be paid for all items
@@ -142,13 +140,15 @@ class Cart(object):
         """
 
         sum = 0
-        
+
         for item in self.cart:
-            sum += Decimal(self.cart[item]['price']) * self.cart[item]['quantity']
+            sum += Decimal(
+                self.cart[item]['price']
+            ) * self.cart[item]['quantity']
 
         return sum
-        
-    def clear ( self ):
+
+    def clear(self):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True

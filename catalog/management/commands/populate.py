@@ -233,7 +233,6 @@ class Command(BaseCommand):
                 price=a['price'],
                 path_to_cover_image=a['path_to_cover_image'],
                 number_copies_stock=a['number_copies_stock'],
-                #score=a['score']
             )[0]
             x.save()
             x.author.add(authorInst)
@@ -269,7 +268,6 @@ class Command(BaseCommand):
             )[0]
             x.save()
 
-
     def vote(self):
 
         voteD = {}
@@ -281,7 +279,6 @@ class Command(BaseCommand):
                 'user': randrange(7)+100,
                 'score': randrange(11)
             }
-
 
         for index, a in enumerate(voteD.values()):
             x = Vote.objects.get_or_create(

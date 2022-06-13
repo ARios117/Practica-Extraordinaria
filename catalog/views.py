@@ -27,7 +27,9 @@ def index(request):
         vote_count[b] = b.votes.count()
 
     list_sorted = []
-    list_sorted = sorted(vote_count.items(), key=lambda x: x[1], reverse=True)[:5]
+    list_sorted = sorted(
+        vote_count.items(), key=lambda x: x[1], reverse=True
+    )[:5]
 
     libros_mas_votados = []
     for x, y in list_sorted:
@@ -72,7 +74,11 @@ def show_book(request, slug):
 
         if vote_form.is_valid():
             # process the data in form.cleaned_data as required
-            Vote.objects.create(book=book, score=vote_form.cleaned_data['score'], user=request.user)
+            Vote.objects.create(
+                book=book,
+                score=vote_form.cleaned_data['score'],
+                user=request.user
+            )
 
             # redirect to a new URL:
             return HttpResponseRedirect(reverse('index'))
